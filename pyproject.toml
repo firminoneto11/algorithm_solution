@@ -1,0 +1,28 @@
+[tool.poetry]
+name = "algorithm_solution"
+version = "1.0.0"
+description = ""
+authors = ["firminoneto11 <firminoneto11@hotmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "3.12.*"
+ruff = "0.3.*"
+pytest = "8.1.*"
+pytest-sugar = "1.0.*"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+# Ruff configs
+[tool.ruff]
+line-length = 88
+target-version = "py312"
+
+[tool.ruff.lint]
+extend-select = ["E501"]
+
+# Pytest configs
+[tool.pytest.ini_options]
+addopts = "-s -v --durations=5"
