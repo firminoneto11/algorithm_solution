@@ -39,7 +39,7 @@ def combine_orders(requests: list[int], n_max: int):
             requests.pop()
         else:
             capacity, limit = 0, 0
-            while (capacity < n_max) and (limit < PER_TRIP) and requests:
+            while (limit < PER_TRIP) and requests:
                 if capacity + requests[0] <= n_max:
                     capacity += requests[0]
                     requests.pop(0)
