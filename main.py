@@ -31,20 +31,22 @@ def get_top_N_open_contracts(
 
 def combine_orders(requests: list[int], n_max: int):
     requests.sort(reverse=True)
-    num_trips = 0
+    PER_TRIP, num_trips = 2, 0
 
     while requests:
         if len(requests) == 1:
             num_trips += 1
             requests.pop()
         else:
-            trip_capacity, trip_count = 0, 0
-            while trip_capacity < n_max and trip_count < 2 and requests:
-                if trip_capacity + requests[0] <= n_max:
-                    trip_capacity += requests[0]
+            capacity, limit = 0, 0
+            while (capacity < n_max) and (limit < PER_TRIP) and requests:
+                if capacity + requests[0] <= n_max:
+                    capacity += requests[0]
                     requests.pop(0)
+                    limit += 1
                 else:
-                    trip_count += 1
+                    break
+
             num_trips += 1
 
     return num_trips

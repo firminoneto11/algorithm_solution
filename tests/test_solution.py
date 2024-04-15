@@ -1,3 +1,5 @@
+from pytest import mark
+
 from main import Contract, combine_orders, get_top_N_open_contracts
 
 
@@ -17,7 +19,14 @@ def test_get_top_N_open_contracts():
     )
 
 
-def test_combine_orders():
-    orders, n_max, expected_orders = [70, 30, 10], 100, 2
-
+@mark.parametrize(
+    argnames="orders,n_max,expected_orders",
+    argvalues=[
+        ([70, 30, 10], 100, 2),
+        ([100, 100, 100], 100, 3),
+        ([100, 100, 99, 5], 100, 4),
+        ([100, 100, 99, 96, 10, 5], 100, 5),
+    ],
+)
+def test_combine_orders(orders: list[int], n_max: int, expected_orders: int):
     assert combine_orders(orders, n_max) == expected_orders
